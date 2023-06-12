@@ -1,11 +1,14 @@
 const Workout = require("../models/Workout");
 const mongoose = require("mongoose");
-const getWorkouts = async (req, res) => {
+import { ErrorRequestHandler, Request, Response } from "express";
+
+
+const getWorkouts = async (req: Request, res: Response) => {
   const workouts = await Workout.find({}).sort({ createdAt: -1 });
   res.status(200).json(workouts);
 };
 
-const getWorkout = async (req, res) => {
+const getWorkout = async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such workout" });
@@ -18,7 +21,7 @@ const getWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-const createWorkout = async (req, res) => {
+const createWorkout = async (req: Request, res: Response) => {
   const { title, sets, reps, load } = req.body;
   const workout = await Workout.create({ title, sets, reps, load });
   if (!workout) {
@@ -27,7 +30,7 @@ const createWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-const updateWorkout = async (req, res) => {
+const updateWorkout = async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "No such workout" });
@@ -39,7 +42,7 @@ const updateWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-const deleteWorkout = async (req, res) => {
+const deleteWorkout = async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such workout" });
