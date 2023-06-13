@@ -28,11 +28,31 @@ const getWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const createWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { title, sets, reps, load } = req.body;
-    const workout = yield Workout.create({ title, sets, reps, load });
-    if (!workout) {
-        res.status(400).json({ error: "No such workout" });
+    let emptyFields = [];
+    if (!title) {
+        emptyFields.push("title");
     }
-    res.status(200).json(workout);
+    if (!sets) {
+        emptyFields.push("sets");
+    }
+    if (!reps) {
+        emptyFields.push("reps");
+    }
+    if (!load) {
+        emptyFields.push("load");
+    }
+    if (emptyFields.length > 0) {
+        return res
+            .status(400)
+            .json({ error: "Please fill in all the fields", emptyFields });
+    }
+    try {
+        const workout = yield Workout.create({ title, sets, reps, load });
+        res.status(200).json(workout);
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 });
 const updateWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
