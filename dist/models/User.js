@@ -44,5 +44,21 @@ userSchema.statics.signup = function (email, password) {
         return user;
     });
 };
+userSchema.statics.login = function (email, password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!email || !password) {
+            throw new Error("Incorrect credentials");
+        }
+        const user = yield this.findOne({ email });
+        if (!user) {
+            throw new Error('Incorrect email');
+        }
+        const match = yield bcrypt.compare(password, user.password);
+        if (!match) {
+            throw new Error("Incorrect password");
+        }
+        return user;
+    });
+};
 const User = (0, mongoose_1.model)("User", userSchema);
 exports.default = User;
