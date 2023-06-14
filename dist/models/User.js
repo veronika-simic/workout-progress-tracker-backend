@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const bcrypt = require("bcrypt");
+const validator = require("validator");
 const userSchema = new mongoose_1.Schema({
     email: {
         type: String,
@@ -24,6 +25,15 @@ const userSchema = new mongoose_1.Schema({
 });
 userSchema.statics.signup = function (email, password) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (!email || !password) {
+            throw new Error("All fields must be filled");
+        }
+        if (!validator.isEmail(email)) {
+            throw new Error("Email not valid");
+        }
+        if (!validator.isStrongPassword(password)) {
+            throw new Error("Password not valid");
+        }
         const exists = yield this.findOne({ email });
         if (exists) {
             throw new Error("Email already in use");

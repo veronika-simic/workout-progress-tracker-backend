@@ -1,6 +1,7 @@
 export {};
 import { Document, Model, model, Schema } from "mongoose";
 const bcrypt = require("bcrypt");
+const validator = require("validator");
 
 interface User extends Document {
   email: string;
@@ -27,6 +28,18 @@ userSchema.statics.signup = async function (
   email: string,
   password: string
 ): Promise<User> {
+  if (!email || !password) {
+    throw new Error("All fields must be filled");
+  }
+
+  if (!validator.isEmail(email)) {
+    throw new Error("Email not valid");
+  }
+
+  if (!validator.isStrongPassword(password)) {
+    throw new Error("Password not valid");
+  }
+
   const exists = await this.findOne({ email });
 
   if (exists) {
