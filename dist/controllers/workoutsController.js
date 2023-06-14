@@ -48,7 +48,7 @@ const createWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     try {
         const workout = yield Workout.create({ title, sets, reps, load });
-        res.status(200).json(workout);
+        res.status(201).json(workout);
     }
     catch (error) {
         res.status(400).json({ error: error.message });

@@ -26,3 +26,50 @@ describe("GET /api/workouts", () => {
         expect(res.body.length).toBeGreaterThan(0);
     }));
 });
+describe("GET /api/workouts/:id", () => {
+    it("should return workout by id", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request(app).get("/api/workouts/64898b7596319c5ca5a2ce8d");
+        expect(res.statusCode).toBe(200);
+        expect(res.body.title).toBe("Chest press");
+    }));
+});
+describe("POST /api/workouts", () => {
+    it("should create workout", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request(app).post("/api/workouts").send({
+            title: "Chest press",
+            sets: 4,
+            reps: 8,
+            load: 40,
+        });
+        expect(res.statusCode).toBe(201);
+        expect(res.body.title).toBe("Chest press");
+    }));
+});
+describe("DELETE /api/workouts/:id", () => {
+    it("should delete workout by id", () => __awaiter(void 0, void 0, void 0, function* () {
+        const createResponse = yield request(app).post("/api/workouts").send({
+            title: "Chest press",
+            sets: 4,
+            reps: 8,
+            load: 40,
+        });
+        const workoutId = createResponse.body._id;
+        const deleteResponse = yield request(app).delete(`/api/workouts/${workoutId}`);
+        expect(deleteResponse.statusCode).toBe(200);
+        expect(deleteResponse.body.title).toBe("Chest press");
+    }));
+});
+describe("PATCH /api/workouts/:id", () => {
+    it("should update workout by id", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request(app)
+            .patch("/api/workouts/64898b7596319c5ca5a2ce8d")
+            .send({
+            title: "Chest press",
+            sets: 8,
+            reps: 8,
+            load: 40,
+        });
+        expect(res.statusCode).toBe(200);
+        expect(res.body.sets).toBe(8);
+    }));
+});

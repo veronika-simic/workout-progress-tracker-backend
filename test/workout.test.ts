@@ -1,5 +1,3 @@
-import { Workout } from "../../client/src/types/workoutState";
-
 export {};
 const mongoose = require("mongoose");
 const request = require("supertest");
@@ -45,30 +43,24 @@ describe("POST /api/workouts", () => {
   });
 });
 
-/* describe("DELETE /api/workouts/:id", () => {
-  let workoutToBeDeletedId: string;
-
-  beforeAll(async () => {
-    const res = await request(app).post("/api/workouts").send({
+describe("DELETE /api/workouts/:id", () => {
+  it("should delete workout by id", async () => {
+    const createResponse = await request(app).post("/api/workouts").send({
       title: "Chest press",
       sets: 4,
       reps: 8,
       load: 40,
     });
-    workoutToBeDeletedId = res.body._id;
-  });
+    const workoutId = createResponse.body._id;
 
-  afterAll(async () => {
-    await request(app).delete(`/api/workouts/${workoutToBeDeletedId}`);
-  });
-  it("should delete workout by id", async () => {
-    const res = await request(app).delete(
-      `/api/workouts/${workoutToBeDeletedId}`
+    const deleteResponse = await request(app).delete(
+      `/api/workouts/${workoutId}`
     );
-    expect(res.statusCode).toBe(200);
-    expect(res.body.sets).toBe(4);
+
+    expect(deleteResponse.statusCode).toBe(200);
+    expect(deleteResponse.body.title).toBe("Chest press");
   });
-}); */
+});
 
 describe("PATCH /api/workouts/:id", () => {
   it("should update workout by id", async () => {
