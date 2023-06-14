@@ -10,12 +10,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const createToken = (_id) => {
+    return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' });
+};
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
 const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     try {
         const user = yield User.signup(email, password);
-        res.status(200).json({ email, user });
+        const token = createToken(user._id);
+        res.status(200).json({ email, token });
     }
     catch (error) {
         res.status(400).json({ error: error.message });
