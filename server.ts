@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const workoutRoutes = require("./routes/workouts");
-const userRoutes = require("./routes/user")
+const userRoutes = require("./routes/user");
 const app = express();
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
@@ -14,15 +14,18 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use("/api/workouts", workoutRoutes);
-app.use("/api/user", userRoutes)
+app.use("/api/user", userRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log("Listening on port " + process.env.PORT);
-    });
+    if (process.env.NODE_ENV !== "test") {
+      app.listen(process.env.PORT, () => {
+        console.log("Listening on port " + process.env.PORT);
+      });
+    }
   })
   .catch((error: ErrorRequestHandler) => {
     console.log(error);
   });
+module.exports = app;
