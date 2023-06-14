@@ -61,4 +61,4 @@ userSchema.statics.login = function (email, password) {
     });
 };
 const User = (0, mongoose_1.model)("User", userSchema);
-exports.default = User;
+module.exports = User;

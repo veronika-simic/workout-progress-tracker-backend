@@ -74,4 +74,4 @@ userSchema.statics.login = async function(email: string, password: string): Prom
 
 const User: UserModel = model<User, UserModel>("User", userSchema);
 
-export default User;
+module.exports = User
