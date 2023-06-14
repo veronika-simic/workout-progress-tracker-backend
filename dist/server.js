@@ -33,8 +33,8 @@ const options = {
         servers: [{ url: "http://localhost:4000/" }]
     },
     apis: [
-        "./src/routes/workoutsRoutes.ts",
-        "./src/routes/userRoutes.ts",
+        "./server/routes/workoutsRoutes.ts",
+        "./server/routes/userRoutes.ts",
     ]
 };
 const swaggerSpec = swaggerJSDoc(options);

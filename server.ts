@@ -35,8 +35,8 @@ const options = {
   },
 
   apis: [
-    "./src/routes/workoutsRoutes.ts",
-    "./src/routes/userRoutes.ts",
+    "./server/routes/workoutsRoutes.ts",
+    "./server/routes/userRoutes.ts",
   ]
 }
 
