@@ -56,17 +56,6 @@ const createWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(400).json({ error: error.message });
     }
 });
-const updateWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ error: "No such workout" });
-    }
-    const workout = yield Workout.findOneAndUpdate({ _id: id }, Object.assign({}, req.body));
-    if (!workout) {
-        return res.status(404).json({ error: "No such workout" });
-    }
-    res.status(200).json(workout);
-});
 const deleteWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -82,6 +71,5 @@ module.exports = {
     getWorkouts,
     getWorkout,
     createWorkout,
-    updateWorkout,
     deleteWorkout,
 };

@@ -88,49 +88,6 @@
  *         description: Workout not found
  *       500:
  *         description: Internal server error
- *   patch:
- *     security:
- *       - bearerAuth: []
- *     tags:
- *       - Workouts
- *     summary: Update existing workout
- *     description: Update existing workout by ID
- *     operationId: updateWorkout
- *     parameters:
- *       -  in: path
- *          name: workoutId
- *          description: ID of workout to update
- *          required: true
- *          schema:
- *           type: string
- *     requestBody:
- *       description: Update existing workout
- *       content:
- *         application/json:
- *           schema:
- *              $ref: "#/components/schemas/Workout"
- *         application/xml:
- *           schema:
- *              $ref: "#/components/schemas/Workout"
- *         application/x-www-form-urlencoded:
- *          schema:
- *              $ref: "#/components/schemas/Workout"
- *       required: true
- *     responses:
- *       200:
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *                $ref: "#/components/schemas/Workout"
- *       400:
- *         description: Invalid ID
- *       401:
- *         description: Missing authentication token
- *       404:
- *         description: Workout not found
- *       500:
- *         description: Internal server error
  *   delete:
  *     security:
  *       - bearerAuth: []
@@ -203,7 +160,5 @@ router.get("/:id", workoutController.getWorkout);
 router.post("/", workoutController.createWorkout);
 
 router.delete("/:id", workoutController.deleteWorkout);
-
-router.patch("/:id", workoutController.updateWorkout);
 
 module.exports = router;

@@ -11,7 +11,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await mongoose.connection.close();
 });
-
 describe("POST /api/user/login", () => {
   it("should log in user", async () => {
     const res = await request(app).post("/api/user/login").send({
