@@ -194,7 +194,8 @@
 const express = require("express");
 const router = express.Router();
 const workoutController = require("../controllers/workoutsController");
-
+const requireAuth = require("../middleware/requireAuth")
+router.use(requireAuth)
 router.get("/", workoutController.getWorkouts);
 
 router.get("/:id", workoutController.getWorkout);
