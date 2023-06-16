@@ -53,25 +53,26 @@ userSchema.statics.signup = async function (
   return user;
 };
 
+userSchema.statics.login = async function (
+  email: string,
+  password: string
+): Promise<User> {
+  if (!email || !password) {
+    throw new Error("Incorrect credentials");
+  }
 
-userSchema.statics.login = async function(email: string, password: string): Promise<User> {
-    if(!email || !password){
-        throw new Error("Incorrect credentials")
-    }
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw new Error("Incorrect email");
+  }
 
-    const user = await this.findOne({email})
-    if (!user) {
-        throw new Error('Incorrect email')
-    }
-
-    const match = await bcrypt.compare(password, user.password)
-    if (!match){
-        throw new Error("Incorrect password")
-    }
-    return user
-
-}
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    throw new Error("Incorrect password");
+  }
+  return user;
+};
 
 const User: UserModel = model<User, UserModel>("User", userSchema);
 
-module.exports = User
+module.exports = User;

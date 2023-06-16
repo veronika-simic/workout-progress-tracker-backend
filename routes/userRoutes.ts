@@ -19,7 +19,7 @@
  *        application/x-www-form-urlencoded:
  *          schema:
  *              $ref: "#/components/schemas/UserLogin"
- *      required: 
+ *      required:
  *          true
  *     responses:
  *       200:
@@ -29,13 +29,13 @@
  *             schema:
  *                 $ref: "#/components/schemas/User"
  *           application/xml:
- *              schema: 
+ *              schema:
  *                 $ref: "#/components/schemas/User"
  *       400:
  *         description: Invalid credentials
- *       401: 
+ *       401:
  *         description:  User does not exist
- *       405: 
+ *       405:
  *         description: Validation exception
  * /api/user/signup:
  *   post:
@@ -44,7 +44,7 @@
  *     summary: Sign up user
  *     description: Creates a new user with verified email and password
  *     operationId: signupUser
- *     requestBody: 
+ *     requestBody:
  *       description: Create a new user
  *       content:
  *        application/json:
@@ -64,10 +64,10 @@
  *           application/json:
  *             schema:
  *               $ref: "#/components/schemas/User"
- *           application/xml: 
- *             schema: 
+ *           application/xml:
+ *             schema:
  *                $ref: "#/components/schemas/User"
- *       405: 
+ *       405:
  *         description: Invalid input
  * components:
  *   schemas:
@@ -108,8 +108,7 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 
-router.post("/login", userController.login)
-router.post("/signup", userController.signUp)
-
+router.post("/login", userController.login);
+router.post("/signup", userController.signUp);
 
 module.exports = router;

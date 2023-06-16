@@ -2,7 +2,7 @@
  * @openapi
  * /api/workouts:
  *   get:
- *     security: 
+ *     security:
  *      - bearerAuth: []
  *     tags:
  *       - Workouts
@@ -16,21 +16,21 @@
  *           application/json:
  *             schema:
  *               type: array
- *               items: 
+ *               items:
  *                 $ref: "#/components/schemas/Workout"
  *       401:
- *         description: Missing authentication token      
- *       500: 
+ *         description: Missing authentication token
+ *       500:
  *         description: Internal server error
  *   post:
- *     security: 
+ *     security:
  *       - bearerAuth: []
  *     tags:
  *       - Workouts
  *     summary: Add new workout
  *     description: Add new workout
  *     operationId: addWorkout
- *     requestBody: 
+ *     requestBody:
  *       description: Create a new workout
  *       content:
  *        application/json:
@@ -54,24 +54,24 @@
  *             schema:
  *              $ref: "#/components/schemas/Workout"
  *       405:
- *         description: Invalid input     
- *       500: 
+ *         description: Invalid input
+ *       500:
  *         description: Internal server error
  * /api/workouts/{workoutId}:
  *   get:
- *     security: 
+ *     security:
  *       - bearerAuth: []
  *     tags:
  *       - Workouts
  *     summary: Find workout by ID
  *     description: Returns a single workout
  *     operationId: getWorkoutById
- *     parameters: 
+ *     parameters:
  *       -  in: path
  *          name: workoutId
  *          description: ID of workout to return
  *          required: true
- *          schema: 
+ *          schema:
  *           type: string
  *     responses:
  *       200:
@@ -80,28 +80,28 @@
  *           application/json:
  *             schema:
  *                $ref: "#/components/schemas/Workout"
- *       400: 
- *         description: Invalid ID 
+ *       400:
+ *         description: Invalid ID
  *       401:
  *         description: Missing authentication token
- *       404: 
- *         description: Workout not found          
- *       500: 
+ *       404:
+ *         description: Workout not found
+ *       500:
  *         description: Internal server error
  *   patch:
- *     security: 
+ *     security:
  *       - bearerAuth: []
  *     tags:
  *       - Workouts
  *     summary: Update existing workout
  *     description: Update existing workout by ID
  *     operationId: updateWorkout
- *     parameters: 
+ *     parameters:
  *       -  in: path
  *          name: workoutId
  *          description: ID of workout to update
  *          required: true
- *          schema: 
+ *          schema:
  *           type: string
  *     requestBody:
  *       description: Update existing workout
@@ -123,40 +123,40 @@
  *           application/json:
  *             schema:
  *                $ref: "#/components/schemas/Workout"
- *       400: 
- *         description: Invalid ID 
+ *       400:
+ *         description: Invalid ID
  *       401:
  *         description: Missing authentication token
- *       404: 
- *         description: Workout not found          
- *       500: 
- *         description: Internal server error 
+ *       404:
+ *         description: Workout not found
+ *       500:
+ *         description: Internal server error
  *   delete:
- *     security: 
+ *     security:
  *       - bearerAuth: []
  *     tags:
  *       - Workouts
  *     summary: Delete existing workout
  *     description: Delete existing workout by ID
  *     operationId: deleteWorkout
- *     parameters: 
+ *     parameters:
  *       -  in: path
  *          name: workoutId
  *          description: ID of workout to delete
  *          required: true
- *          schema: 
+ *          schema:
  *           type: string
  *     responses:
  *       200:
  *         description: OK
- *       400: 
- *         description: Invalid ID 
+ *       400:
+ *         description: Invalid ID
  *       401:
  *         description: Missing authentication token
- *       404: 
- *         description: Workout not found          
- *       500: 
- *         description: Internal server error 
+ *       404:
+ *         description: Workout not found
+ *       500:
+ *         description: Internal server error
  * components:
  *   securitySchemes:
  *      bearerAuth:
@@ -194,8 +194,8 @@
 const express = require("express");
 const router = express.Router();
 const workoutController = require("../controllers/workoutsController");
-const requireAuth = require("../middleware/requireAuth")
-router.use(requireAuth)
+const requireAuth = require("../middleware/requireAuth");
+router.use(requireAuth);
 router.get("/", workoutController.getWorkouts);
 
 router.get("/:id", workoutController.getWorkout);

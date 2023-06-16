@@ -51,7 +51,7 @@ userSchema.statics.login = function (email, password) {
         }
         const user = yield this.findOne({ email });
         if (!user) {
-            throw new Error('Incorrect email');
+            throw new Error("Incorrect email");
         }
         const match = yield bcrypt.compare(password, user.password);
         if (!match) {

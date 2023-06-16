@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 
 import { Request, Response } from "express";
 
-const getWorkouts = async (req: Request, res: Response) => {
-  const workouts = await Workout.find({}).sort({ createdAt: -1 });
+const getWorkouts = async (req: { user: { _id: string; }; }, res: Response) => {
+  const user_id = req.user._id
+  const workouts = await Workout.find({user_id}).sort({ createdAt: -1 });
   res.status(200).json(workouts);
 };
 
@@ -21,7 +22,7 @@ const getWorkout = async (req: Request, res: Response) => {
   res.status(200).json(workout);
 };
 
-const createWorkout = async (req: Request, res: Response) => {
+const createWorkout = async (req: { body: { title:string; sets: number; reps: number; load:number; }; user: { _id: string; }; }, res: Response) => {
   const { title, sets, reps, load } = req.body;
   let emptyFields = [];
   if (!title) {
@@ -43,7 +44,8 @@ const createWorkout = async (req: Request, res: Response) => {
       .json({ error: "Please fill in all the fields", emptyFields });
   }
   try {
-    const workout = await Workout.create({ title, sets, reps, load });
+    const user_id = req.user._id
+    const workout = await Workout.create({ title, sets, reps, load, user_id });
     res.status(201).json(workout);
   } catch (error: any) {
     res.status(400).json({ error: error.message });

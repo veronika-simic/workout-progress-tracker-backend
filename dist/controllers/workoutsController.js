@@ -12,7 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Workout = require("../models/Workout");
 const mongoose = require("mongoose");
 const getWorkouts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const workouts = yield Workout.find({}).sort({ createdAt: -1 });
+    const user_id = req.user._id;
+    const workouts = yield Workout.find({ user_id }).sort({ createdAt: -1 });
     res.status(200).json(workouts);
 });
 const getWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,7 +48,8 @@ const createWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             .json({ error: "Please fill in all the fields", emptyFields });
     }
     try {
-        const workout = yield Workout.create({ title, sets, reps, load });
+        const user_id = req.user._id;
+        const workout = yield Workout.create({ title, sets, reps, load, user_id });
         res.status(201).json(workout);
     }
     catch (error) {
