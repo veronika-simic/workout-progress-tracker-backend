@@ -54,13 +54,11 @@ To see the project in browser visit:
 > http://localhost:4000/
 
 ## Usage
-
-- Track your monthly, quarterly or anual workout progresss
 - See on which exercisses you are making the most progress
 
 ## Project Status
 
-Project is: _in progress_
+Project is: _finished_
 
 ## Room for Improvement
 
