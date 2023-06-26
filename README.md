@@ -1,6 +1,6 @@
 
 > Backend for workout progress tracker application that allows user to track their workouts
-
+> Server available at: https://workout-progress-tracker-client.onrender.com
 ## Table of Contents
 
 - [General Info](#general-information)
