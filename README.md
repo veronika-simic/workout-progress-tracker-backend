@@ -53,16 +53,16 @@ To see the project in browser visit:
 
 > http://localhost:4000/
 
+To see project documentation visit:
+
+> http://localhost:4000/api-docs
+
 ## Usage
-- See on which exercisses you are making the most progress
+- See on which exercises you are making the most progress
 
 ## Project Status
 
 Project is: _finished_
-
-## Room for Improvement
-
-Room for improvement:
 
 ## Contact
 
